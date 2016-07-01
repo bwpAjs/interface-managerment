@@ -1,0 +1,48 @@
+<section ng-controller="userController" ng-init="list()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="lists"><a href="#!/users/add" class="btn btn-info">添加用户</a>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>姓名</th>
+                            <th>角色</th>
+                            <th>创建人</th>
+                            <th>创建日期</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in users">
+                            <td>
+                                <a href="#!/user/list/{{user._id}}/view" title="{{user.email}}">{{user.username}}</a>
+                            </td>
+                            <td>
+                                {{user.name}}
+                            </td>
+                            <td>
+                                <span ng-if="!user.roles || user.roles.length > 0 " ng-repeat=" role in user.roles"  class="label label-info">
+                                        {{role.name}}
+                                </span>
+                            </td>
+                            <td>
+                                {{user.author ? user.author.username : '无' }}
+                            </td>
+                            <td>
+                                {{user.created}}
+                            </td>
+                            <td>
+                                <a href="#!/user/list/:{{user._id}}/edit" class="btn btn-default btn-xs">编辑</a>
+                                <a href="#!/user/list/:{{user._id}}/del" ng-if="user.status !== 101" class="btn btn-danger btn-xs J_del" >删除</a>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    
+</section>
